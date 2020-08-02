@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './reset.css';
+import Home from './pages/Home';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AddVideo from './pages/cadastro/Video';
+import AddVideo from './pages/register/Video';
+import AddCategory from './pages/register/Category';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path ="/" exact component={App} />
-      <Route path ="/cadastrar-video" component={AddVideo} />
+      <Route path ="/" exact component={Home} />
+      <Route path ="/cadastro/video" component={AddVideo} />
+      <Route path ="/cadastro/categoria" component={AddCategory} />
       <Route component={() => { return <h1>404 - Not found.</h1>}} />
     </Switch>
   </BrowserRouter>,  
