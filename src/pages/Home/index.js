@@ -9,7 +9,7 @@ import initialData from '../../data/initial_data.json';
 
 function Home () {
   return (
-    <div className="App">
+    <div style={{ background: '#141414' }}>
       <Menu />
       
       <BannerMain
