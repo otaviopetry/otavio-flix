@@ -25,7 +25,9 @@ const Container = styled.ul`
   .slick-next {
     right: 16px;
   }
-
+  .slick-dots {
+    bottom: -30px;    
+  }
   .slick-dots button::before {
     color: #fff;
     opacity: 0.8;
@@ -51,10 +53,11 @@ const Slider = ({ children }) => (
     <SlickSlider {...{
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 200,
       centerMode: false,
       variableWidth: true,
       adaptiveHeight: true,
+      slidesToScroll: 2
     }}
     >
       {children}

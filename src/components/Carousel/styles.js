@@ -52,4 +52,8 @@ export const VideoCardGroupContainer = styled.section`
   min-height: 197px;
   margin-left: 5%;
   margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 80px;
+  }
 `;
