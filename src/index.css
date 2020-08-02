@@ -20,10 +20,10 @@ body {
   padding: 0;
 }
 
-body {
-  background: #141414;
-}
-
 a {
   color: inherit;
-} 
+}
+
+.App {
+  background: #141414;
+}

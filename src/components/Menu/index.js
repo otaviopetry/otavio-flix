@@ -13,7 +13,7 @@ function Menu () {
                 <img className="Logo" src={logoImg} alt="Logotipo otavio.flix" />
             </a>
 
-            <Button>
+            <Button as="a" href="/cadastrar-video">
                 Novo vídeo
             </Button>
         </nav>
