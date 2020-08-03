@@ -5,7 +5,7 @@ import Menu from '../Menu';
 import Footer from '../Footer';
 
 const Main = styled.main`
-    background-color: var(--black);
+    background-color: #232323;
     color: var(--white);
     flex: 1;
     padding: 50px 5%;

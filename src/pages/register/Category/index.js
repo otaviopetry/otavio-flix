@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import PageDefault from '../../../components/PageDefault';
 
+import FormField from '../../../components/FormField';
+
 function AddCategory () {
   const [categories, setCategories] = useState([]);
 
-  const newCategoryObject = {
+  const categoryInitialObject = {
     title: '',
     description: '',
-    color: '#222'
+    color: ''
   }
 
-  const [newCategory, setNewCategory] = useState(newCategoryObject);
+  const [newCategory, setNewCategory] = useState(categoryInitialObject);
 
   function setValue (key, value) {
     setNewCategory({
@@ -31,6 +33,8 @@ function AddCategory () {
     evt.preventDefault();
 
     setCategories([...categories, newCategory]);
+
+    setNewCategory(categoryInitialObject);
   }
 
   console.log(categories);
@@ -42,26 +46,29 @@ function AddCategory () {
 
       <form onSubmit={handleSubmit}  style={{ background: `${newCategory.color}`}}>
         
-        <label>
-          Nome da Categoria: 
-          <input type="text" name="title" onChange={handleChange} />
-        </label>
+        <FormField
+          label="Category name"
+          type="text"
+          value={newCategory.title}
+          onChange={handleChange}
+          name="title"
+        />
 
-        <br />
+        <FormField
+          label="Category description"
+          type="text"
+          value={newCategory.description}
+          onChange={handleChange}
+          name="description"
+        />
 
-        <label>
-          Descrição da Categoria
-          <input type="text" name="description" onChange={handleChange} />
-        </label>
-
-        <br />
-
-        <label>
-          Cor:
-          <input type="color" name="color" onChange={handleChange} />
-        </label>
-
-        <br />
+        <FormField
+          label="Category color"
+          type="color"
+          value={newCategory.color}
+          onChange={handleChange}
+          name="color"
+        />
 
         <button>Cadastrar</button>
 
