@@ -2,34 +2,34 @@ import React, { useState } from 'react';
 import PageDefault from '../../../components/PageDefault';
 
 import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
 
-function AddCategory () {
+function AddCategory() {
   const [categories, setCategories] = useState([]);
 
   const categoryInitialObject = {
     title: '',
     description: '',
-    color: ''
-  }
+    color: '',
+  };
 
   const [newCategory, setNewCategory] = useState(categoryInitialObject);
 
-  function setValue (key, value) {
+  function setValue(key, value) {
     setNewCategory({
       ...newCategory,
-      [key]: value
-    })
+      [key]: value,
+    });
   }
 
-  function handleChange (evt) {
-
+  function handleChange(evt) {
     const key = evt.target.getAttribute('name');
-    const value = evt.target.value;
-    
+    const { value } = evt.target;
+
     setValue(key, value);
   }
 
-  function handleSubmit (evt) {
+  function handleSubmit(evt) {
     evt.preventDefault();
 
     setCategories([...categories, newCategory]);
@@ -37,15 +37,12 @@ function AddCategory () {
     setNewCategory(categoryInitialObject);
   }
 
-  console.log(categories);
-  console.log(newCategory);
-
   return (
     <PageDefault>
-      <h1>Cadastro de Categoria</h1> 
+      <h1>Cadastro de Categoria</h1>
 
-      <form onSubmit={handleSubmit}  style={{ background: `${newCategory.color}`}}>
-        
+      <form onSubmit={handleSubmit} style={{ background: `${newCategory.color}` }}>
+
         <FormField
           label="Category name"
           type="text"
@@ -56,7 +53,7 @@ function AddCategory () {
 
         <FormField
           label="Category description"
-          type="text"
+          type="textarea"
           value={newCategory.description}
           onChange={handleChange}
           name="description"
@@ -70,21 +67,18 @@ function AddCategory () {
           name="color"
         />
 
-        <button>Cadastrar</button>
-
-        <ul>
-          {categories.map( (category, index) => {
-            return (
-              <li key={index}>{category.title}</li>
-            );
-          })}          
-        </ul>
+        <Button>Cadastrar</Button>
 
       </form>
-      
-      
+
+      <ul>
+        {categories.map((category, index) => (
+          <li key={`index${index}`}>{category.title}</li>
+        ))}
+      </ul>
+
     </PageDefault>
-  )
+  );
 }
 
 export default AddCategory;

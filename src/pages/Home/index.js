@@ -7,15 +7,15 @@ import Footer from '../../components/Footer';
 
 import initialData from '../../data/initial_data.json';
 
-function Home () {
+function Home() {
   return (
     <div style={{ background: '#141414' }}>
       <Menu />
-      
+
       <BannerMain
         videoTitle={initialData.categorias[0].videos[0].titulo}
         url={initialData.categorias[0].videos[0].url}
-        videoDescription={"O que é Front-end?"}
+        videoDescription="O que é Front-end?"
       />
 
       <Carousel
