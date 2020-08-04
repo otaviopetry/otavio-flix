@@ -1,83 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageDefault from '../../../components/PageDefault';
 
-function AddCategory () {
+import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
+
+function AddCategory() {
   const [categories, setCategories] = useState([]);
 
-  const newCategoryObject = {
+  const categoryInitialObject = {
     title: '',
     description: '',
-    color: '#222'
-  }
+    color: '',
+  };
 
-  const [newCategory, setNewCategory] = useState(newCategoryObject);
+  const [newCategory, setNewCategory] = useState(categoryInitialObject);
 
-  function setValue (key, value) {
+  function setValue(key, value) {
     setNewCategory({
       ...newCategory,
-      [key]: value
-    })
+      [key]: value,
+    });
   }
 
-  function handleChange (evt) {
-
+  function handleChange(evt) {
     const key = evt.target.getAttribute('name');
-    const value = evt.target.value;
-    
+    const { value } = evt.target;
+
     setValue(key, value);
   }
 
-  function handleSubmit (evt) {
+  function handleSubmit(evt) {
     evt.preventDefault();
 
     setCategories([...categories, newCategory]);
+
+    setNewCategory(categoryInitialObject);
   }
 
-  console.log(categories);
-  console.log(newCategory);
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categories';
+
+    fetch(URL)
+      .then(async (result) => {
+        const response = await result.json();
+        setCategories([
+          ...response,
+        ]);
+      });
+  }, []);
 
   return (
     <PageDefault>
-      <h1>Cadastro de Categoria</h1> 
+      <h1>Cadastro de Categoria</h1>
 
-      <form onSubmit={handleSubmit}  style={{ background: `${newCategory.color}`}}>
-        
-        <label>
-          Nome da Categoria: 
-          <input type="text" name="title" onChange={handleChange} />
-        </label>
+      <form onSubmit={handleSubmit} style={{ background: `${newCategory.color}` }}>
 
-        <br />
+        <FormField
+          label="Nome"
+          type="text"
+          value={newCategory.title}
+          onChange={handleChange}
+          name="title"
+        />
 
-        <label>
-          Descrição da Categoria
-          <input type="text" name="description" onChange={handleChange} />
-        </label>
+        <FormField
+          label="Descrição"
+          type="textarea"
+          value={newCategory.description}
+          onChange={handleChange}
+          name="description"
+        />
 
-        <br />
+        <FormField
+          label="Cor"
+          type="color"
+          value={newCategory.color}
+          onChange={handleChange}
+          name="color"
+        />
 
-        <label>
-          Cor:
-          <input type="color" name="color" onChange={handleChange} />
-        </label>
-
-        <br />
-
-        <button>Cadastrar</button>
-
-        <ul>
-          {categories.map( (category, index) => {
-            return (
-              <li key={index}>{category.title}</li>
-            );
-          })}          
-        </ul>
+        <Button>Cadastrar</Button>
 
       </form>
-      
-      
+
+      { categories.length === 0 && (
+        <div>
+          Carregando...
+        </div>
+      )}
+
+      <ul>
+        {categories.map((category) => (
+          <li key={category.title}>{category.title}</li>
+        ))}
+      </ul>
+
     </PageDefault>
-  )
+  );
 }
 
 export default AddCategory;
