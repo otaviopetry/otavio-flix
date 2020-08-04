@@ -44,7 +44,7 @@ function AddCategory() {
       <form onSubmit={handleSubmit} style={{ background: `${newCategory.color}` }}>
 
         <FormField
-          label="Category name"
+          label="Nome"
           type="text"
           value={newCategory.title}
           onChange={handleChange}
@@ -52,7 +52,7 @@ function AddCategory() {
         />
 
         <FormField
-          label="Category description"
+          label="Descrição"
           type="textarea"
           value={newCategory.description}
           onChange={handleChange}
@@ -60,7 +60,7 @@ function AddCategory() {
         />
 
         <FormField
-          label="Category color"
+          label="Cor"
           type="color"
           value={newCategory.color}
           onChange={handleChange}
