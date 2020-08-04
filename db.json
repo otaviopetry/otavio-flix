@@ -5,6 +5,12 @@
             "title": "Front End",
             "description": "An awesome category",
             "color": "#cbd1ff"
+        },
+        {
+            "id": 2,
+            "title": "Back End",
+            "description": "Another awesome category",
+            "color": "green"
         }
     ]
 }
