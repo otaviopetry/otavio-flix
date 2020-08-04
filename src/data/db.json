@@ -2,7 +2,7 @@
     "categories": [
         {
             "id": 1,
-            "name": "Front End",
+            "title": "Front End",
             "description": "An awesome category",
             "color": "#cbd1ff"
         }

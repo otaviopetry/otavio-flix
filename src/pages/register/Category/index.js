@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageDefault from '../../../components/PageDefault';
 
 import FormField from '../../../components/FormField';
@@ -37,6 +37,18 @@ function AddCategory() {
     setNewCategory(categoryInitialObject);
   }
 
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categories';
+
+    fetch(URL)
+      .then(async (result) => {
+        const response = await result.json();
+        setCategories([
+          ...response,
+        ]);
+      });
+  }, []);
+
   return (
     <PageDefault>
       <h1>Cadastro de Categoria</h1>
@@ -71,9 +83,15 @@ function AddCategory() {
 
       </form>
 
+      { categories.length === 0 && (
+        <div>
+          Carregando...
+        </div>
+      )}
+
       <ul>
-        {categories.map((category, index) => (
-          <li key={`index${index}`}>{category.title}</li>
+        {categories.map((category) => (
+          <li key={category.title}>{category.title}</li>
         ))}
       </ul>
 
