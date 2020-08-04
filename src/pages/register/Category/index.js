@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PageDefault from '../../../components/PageDefault';
 
+import categoriesRepository from '../../../repositories/categories';
+
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 
-function AddCategory() {
-  const [categories, setCategories] = useState([]);
-
-  const categoryInitialObject = {
-    title: '',
-    description: '',
-    color: '',
-  };
-
-  const [newCategory, setNewCategory] = useState(categoryInitialObject);
+function useForm(initialData) {
+  const [newCategory, setNewCategory] = useState(initialData);
 
   function setValue(key, value) {
     setNewCategory({
@@ -29,33 +23,53 @@ function AddCategory() {
     setValue(key, value);
   }
 
+  function clearForm() {
+    setNewCategory(initialData);
+  }
+
+  return {
+    newCategory,
+    handleChange,
+    clearForm,
+  };
+}
+
+function AddCategory() {
+  const [categories, setCategories] = useState([]);
+
+  const categoryInitialObject = {
+    title: '',
+    description: '',
+    color: '',
+  };
+
+  const {
+    handleChange,
+    newCategory,
+    clearForm,
+  } = useForm(categoryInitialObject);
+
   function handleSubmit(evt) {
     evt.preventDefault();
 
     setCategories([...categories, newCategory]);
 
-    setNewCategory(categoryInitialObject);
+    clearForm(categoryInitialObject);
   }
 
   useEffect(() => {
-    const URL = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categories'
-      : 'https://otavio-flix.herokuapp.com/categories';
-
-    fetch(URL)
-      .then(async (result) => {
-        const response = await result.json();
-        setCategories([
-          ...response,
-        ]);
-      });
+    categoriesRepository.getAllCategoriesWithContent()
+      .then((categoriesWithContent) => {
+        setCategories(categoriesWithContent);
+      })
+      .catch((error) => console.warn(error));
   }, []);
 
   return (
     <PageDefault>
       <h1>Cadastro de Categoria</h1>
 
-      <form onSubmit={handleSubmit} style={{ background: `${newCategory.color}` }}>
+      <form onSubmit={handleSubmit}>
 
         <FormField
           label="Nome"

@@ -10,7 +10,27 @@
             "id": 2,
             "title": "Back End",
             "description": "Another awesome category",
-            "color": "green"
+            "color": "#6AD61D"
+        },
+        {
+            "id": 3,
+            "title": "Programming logic",
+            "description": "Yet another awesome category",
+            "color": "#B62424"
+        },
+        {
+            "id": 4,
+            "title": "Carrer",
+            "description": "Carrer category",
+            "color": "#25E5F8"
+        }
+    ],
+    "videos": [
+        {
+            "id": 1,
+            "categoryId": 2,
+            "title": "Princípios SOLID em uma API REST com Node.js e TypeScript | Code/Drops #44",
+            "url": "https://www.youtube.com/watch?v=vAV4Vy4jfkc"
         }
     ]
 }

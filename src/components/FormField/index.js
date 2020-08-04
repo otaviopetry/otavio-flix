@@ -26,7 +26,7 @@ const Input = styled.input`
   border-top: 4px solid transparent;
   border-bottom: 4px solid #53585d;
 
-  padding: 16px;
+  padding: 24px 12px;
   margin-bottom: 45px;
   padding-top: 16px;
 
@@ -42,26 +42,24 @@ const Input = styled.input`
   }
 
   &:focus:not([type='color']) + span {
-    transform: scale(0.8) translateY(-10px);
+    transform: scale(0.7) translateY(-4px);
   }
 
   ${({ hasValue }) => hasValue && css`
       &:not([type='color']) + span {
-        transform: scale(0.8) translateY(-10px);
+        transform: scale(0.7) translateY(-4px);
       }      
     `}
 `;
 
-const Label = styled.label`
-
-`;
+const Label = styled.label``;
 
 Label.Text = styled.span`
   color: #e5e5e5;
   height: 57px;
   position: absolute;
   top: 0;
-  left: 16px;
+  left: 12px;
   margin-bottom: 16px;
 
   display: flex;
