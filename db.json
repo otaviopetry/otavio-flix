@@ -31,6 +31,12 @@
             "categoryId": 2,
             "title": "Princípios SOLID em uma API REST com Node.js e TypeScript | Code/Drops #44",
             "url": "https://www.youtube.com/watch?v=vAV4Vy4jfkc"
+        },
+        {
+          "id:": 2,
+          "categoryId": 1,
+          "title": "Como fazer validações de formulário com React? #FailFastValidations | Formik Engenharia Reversa #02",
+          "url": "https://www.youtube.com/watch?v=-nYNd6EuZHU"
         }
     ]
 }

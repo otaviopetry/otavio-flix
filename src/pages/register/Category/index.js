@@ -107,7 +107,7 @@ function AddCategory() {
 
       <ul>
         {categories.map((category) => (
-          <li key={category.title}>{category.title}</li>
+          <li key={category.id}>{category.title}</li>
         ))}
       </ul>
 

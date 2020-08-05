@@ -1,6 +1,6 @@
 import config from '../config';
 
-const URL_CATEGORIES = `${config.API_URL}/categories`;
+const URL_CATEGORIES = `${config.API_URL}/categories?_embed=videos`;
 
 function getAllCategoriesWithContent() {
   return fetch(URL_CATEGORIES)

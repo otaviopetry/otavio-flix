@@ -1,20 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import Menu from '../../components/Menu';
+import categoriesRepository from '../../repositories/categories';
+
+import PageDefault from '../../components/PageDefault';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import Footer from '../../components/Footer';
 
-import initialData from '../../data/initial_data.json';
+// import initialData from '../../data/initial_data.json';
 
 function Home() {
-  return (
-    <div style={{ background: '#141414' }}>
-      <Menu />
+  const [initialData, setInitialData] = useState([]);
 
-      <BannerMain
-        videoTitle={initialData.categorias[0].videos[0].titulo}
-        url={initialData.categorias[0].videos[0].url}
+  useEffect(() => {
+    categoriesRepository.getAllCategoriesWithContent()
+      .then((categoriesWithContent) => {
+        setInitialData(categoriesWithContent);
+      })
+      .catch((error) => console.warn(error));
+  }, []);
+
+  console.log(initialData);
+
+  return (
+    <PageDefault paddingAll={0}>
+
+      {initialData.length === 0 && <div>Loading...</div>}
+
+      {initialData.map((category, index) => {
+        if (index === 0) {
+          return (
+            <>
+              <BannerMain
+                videoTitle={initialData[0].videos[0].title}
+                url={initialData[0].videos[0].url}
+                videoDescription={initialData[0].videos[0].description}
+              />
+
+              <Carousel
+                ignoreFirstVideo
+                category={initialData[0]}
+              />
+            </>
+          );
+        }
+
+        return (
+          <Carousel
+            ignoreFirstVideo
+            category={initialData[index]}
+          />
+        );
+      })}
+
+      {/* <BannerMain
+        videoTitle={initialData.categories[0].videos[0].titulo}
+        url={initialData.categories[0].videos[0].url}
         videoDescription="O que é Front-end?"
       />
 
@@ -36,11 +76,9 @@ function Home() {
       <Carousel
         ignoreFirstVideo
         category={initialData.categorias[3]}
-      />
+      /> */}
 
-      <Footer />
-
-    </div>
+    </PageDefault>
   );
 }
 
